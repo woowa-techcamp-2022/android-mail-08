@@ -7,6 +7,8 @@ object ConvertUtils {
         R.id.nav_primary -> "Primary"
         R.id.nav_social -> "Primary"
         R.id.nav_promotion -> "Promotion"
+        R.id.bottom_nav_mail -> "MailFragment"
+        R.id.bottom_nav_setting -> "SettingFragment"
         else -> ""
     }
 }

@@ -10,6 +10,7 @@ class MainViewModel:ViewModel() {
 
     val userLiveData = MutableLiveData<User>()
     val checkedNavMenuItem = MutableLiveData<Int>(R.id.nav_primary)
+    val selectedBottomMenuId = MutableLiveData<Int>(R.id.bottom_nav_mail)
 
 
 }
