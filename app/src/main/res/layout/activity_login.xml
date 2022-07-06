@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.login.LoginActivity">
+    tools:context=".presentation.LoginActivity">
 
     <ImageView
         android:id="@+id/login_logo_image_view"
@@ -32,6 +32,7 @@
             android:id="@+id/login_nickname_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:maxLength="12"
             android:hint="@string/nickname"
             android:inputType="text" />
 
@@ -60,6 +61,7 @@
         android:id="@+id/next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/login_email_text_input_layout"
         app:layout_constraintEnd_toEndOf="@+id/login_email_text_input_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="@dimen/login_bottom_space"
