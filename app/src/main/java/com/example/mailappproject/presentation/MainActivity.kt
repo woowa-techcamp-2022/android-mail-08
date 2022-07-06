@@ -3,9 +3,6 @@ package com.example.mailappproject.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -31,24 +28,39 @@ class MainActivity : AppCompatActivity() {
 
         initUser()
         initAppBar()
+        initBottomNav()
+    }
+
+    private fun initBottomNav() {
+        binding.mainBottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.bottom_nav_mail -> {
+
+                }
+                R.id.bottom_nav_setting -> {
+
+                }
+            }
+            true
+        }
     }
 
     private fun initAppBar() {
         binding.run {
-            setSupportActionBar(toolBar)
+            setSupportActionBar(mainToolBar)
             supportActionBar?.title = this@MainActivity.getString(R.string.w_mail)
             val toggle = ActionBarDrawerToggle(
                 this@MainActivity,
-                drawerLayout,
-                toolBar,
+                mainDrawerLayout,
+                mainToolBar,
                 R.string.navigation_open,
                 R.string.navigation_close
             )
-            drawerLayout.addDrawerListener(toggle)
-            navigationView.setCheckedItem(mainViewModel.checkedNavMenuItem.value!!)
-            navigationView.setNavigationItemSelectedListener {
+            mainDrawerLayout.addDrawerListener(toggle)
+            mainNavigationView.setCheckedItem(mainViewModel.checkedNavMenuItem.value!!)
+            mainNavigationView.setNavigationItemSelectedListener {
                 mainViewModel.checkedNavMenuItem.value = it.itemId
-                drawerLayout.closeDrawer(GravityCompat.START)
+                mainDrawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
             toggle.syncState()
