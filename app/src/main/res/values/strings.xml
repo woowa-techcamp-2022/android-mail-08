@@ -7,4 +7,12 @@
     <string name="email_error_msg">올바른 이메일을 입력해주세요.</string>
     <string name="mail">Mail</string>
     <string name="setting">Setting</string>
+    <string name="social">Social</string>
+    <string name="promotion">Promotion</string>
+    <string name="primary">Primary</string>
+    <string name="w_mail">W mail</string>
+    <string name="navigation_open">open</string>
+    <string name="navigation_close">close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
