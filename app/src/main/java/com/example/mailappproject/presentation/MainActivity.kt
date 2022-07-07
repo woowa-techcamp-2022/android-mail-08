@@ -90,7 +90,6 @@ class MainActivity : AppCompatActivity() {
             }
             transaction.commit()
         }
-
     }
 
     private fun initAppBar() {
