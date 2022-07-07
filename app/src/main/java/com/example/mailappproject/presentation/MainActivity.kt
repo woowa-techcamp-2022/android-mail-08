@@ -107,6 +107,9 @@ class MainActivity : AppCompatActivity() {
             mainNavigationView.setCheckedItem(mainViewModel.checkedNavMenuItem.value!!)
             mainNavigationView.setNavigationItemSelectedListener {
                 mainViewModel.checkedNavMenuItem.value = it.itemId
+                binding.mainBottomNavigation?.selectedItemId = R.id.bottom_nav_mail
+                binding.mainNavigationRailView?.selectedItemId = R.id.bottom_nav_mail
+                beginTransaction(R.id.bottom_nav_mail, ConvertUtils.getStringById(R.id.bottom_nav_mail))
                 mainDrawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
