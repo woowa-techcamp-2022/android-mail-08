@@ -9,6 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/base_text"
         android:textSize="50sp"
         android:text="@string/w_mail"/>
 

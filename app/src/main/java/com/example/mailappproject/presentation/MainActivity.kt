@@ -1,12 +1,18 @@
 package com.example.mailappproject.presentation
 
+import android.content.res.Configuration
+import android.media.VolumeShaper
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.window.layout.WindowMetrics
+import androidx.window.layout.WindowMetricsCalculator
 import com.example.mailappproject.R
 import com.example.mailappproject.data.User
 import com.example.mailappproject.databinding.ActivityMainBinding
@@ -28,23 +34,51 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-
+        checkConfiguration()
         initUser()
         initAppBar()
         initBottomNav()
     }
 
-    private fun checkConfiguration(){
+    private fun getDpWidth(): Float{
+        val windowMetrics: WindowMetrics = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(this)
+        val displayMetrics = resources.displayMetrics
+        val pxWidth  = windowMetrics.bounds.width()
+        val density  = displayMetrics.density
+        return pxWidth/density
+    }
 
+    private fun checkConfiguration(){
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && getDpWidth()>=600f){
+            Toast.makeText(this@MainActivity, "가로모드", Toast.LENGTH_SHORT).show()
+            initNavigationRail()
+        }else if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+            initBottomNav()
+        }
+    }
+
+    private fun initNavigationRail(){
+        mainViewModel.selectedBottomMenuId.value?.let { id ->
+            binding.mainNavigationRailView?.selectedItemId = id
+            beginTransaction(id, ConvertUtils.getStringById(id))
+        }
+        binding.mainNavigationRailView?.run {
+            selectedItemId = mainViewModel.selectedBottomMenuId.value!!
+            setOnItemSelectedListener {
+                val id = it.itemId
+                mainViewModel.selectedBottomMenuId.value = id
+                beginTransaction(id, ConvertUtils.getStringById(id))
+                true
+            }
+        }
     }
 
     private fun initBottomNav() {
         mainViewModel.selectedBottomMenuId.value?.let { id ->
-            binding.mainBottomNavigation.selectedItemId = id
+            binding.mainBottomNavigation?.selectedItemId = id
             beginTransaction(id, ConvertUtils.getStringById(id))
         }
-        binding.mainBottomNavigation.run {
+        binding.mainBottomNavigation?.run {
             selectedItemId = mainViewModel.selectedBottomMenuId.value!!
             setOnItemSelectedListener {
                 val id = it.itemId
@@ -113,14 +147,17 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount==1){
             supportFragmentManager.popBackStack()
-            binding.mainBottomNavigation.selectedItemId = R.id.bottom_nav_mail
+            if (resources.configuration.orientation==Configuration.ORIENTATION_PORTRAIT)
+                binding.mainBottomNavigation?.selectedItemId = R.id.bottom_nav_mail
+            else
+                binding.mainNavigationRailView?.selectedItemId = R.id.bottom_nav_mail
             mainViewModel.selectedBottomMenuId.value = R.id.bottom_nav_mail
             return
         }
         mainViewModel.run {
             if (selectedBottomMenuId.value == R.id.bottom_nav_mail && checkedNavMenuItem.value!=R.id.nav_primary){
                 checkedNavMenuItem.value = R.id.nav_primary
-                binding.mainNavigationView.setCheckedItem(R.id.nav_primary)
+                binding.mainNavigationView?.setCheckedItem(R.id.nav_primary)
                 return
             }
         }
