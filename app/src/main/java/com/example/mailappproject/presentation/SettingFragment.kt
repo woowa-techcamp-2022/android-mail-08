@@ -30,6 +30,14 @@ class SettingFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.run {
+            fragmentSettingNickName.text = mainViewModel.userLiveData.value?.nickName
+            fragmentSettingEmail.text = mainViewModel.userLiveData.value?.email
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

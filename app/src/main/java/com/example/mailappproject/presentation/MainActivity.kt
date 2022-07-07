@@ -28,9 +28,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
+
         initUser()
         initAppBar()
         initBottomNav()
+    }
+
+    private fun checkConfiguration(){
+
     }
 
     private fun initBottomNav() {
@@ -38,12 +44,14 @@ class MainActivity : AppCompatActivity() {
             binding.mainBottomNavigation.selectedItemId = id
             beginTransaction(id, ConvertUtils.getStringById(id))
         }
-        binding.mainBottomNavigation.selectedItemId = mainViewModel.selectedBottomMenuId.value!!
-        binding.mainBottomNavigation.setOnItemSelectedListener {
-            val id = it.itemId
-            mainViewModel.selectedBottomMenuId.value = id
-            beginTransaction(id, ConvertUtils.getStringById(id))
-            true
+        binding.mainBottomNavigation.run {
+            selectedItemId = mainViewModel.selectedBottomMenuId.value!!
+            setOnItemSelectedListener {
+                val id = it.itemId
+                mainViewModel.selectedBottomMenuId.value = id
+                beginTransaction(id, ConvertUtils.getStringById(id))
+                true
+            }
         }
     }
 
@@ -60,9 +68,18 @@ class MainActivity : AppCompatActivity() {
                 R.id.bottom_nav_setting -> fragment = fragment as SettingFragment
             }
         }
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment_container_view, fragment!!, tag)
-            .commit()
+        supportFragmentManager.run {
+            val transaction = beginTransaction().replace(R.id.main_fragment_container_view, fragment!!, tag)
+            if (backStackEntryCount<1 && id == R.id.bottom_nav_setting){
+                transaction.addToBackStack(tag)
+            }else if (backStackEntryCount == 1 && id == R.id.bottom_nav_setting){
+                return@run
+            } else{
+                popBackStack()
+            }
+            transaction.commit()
+        }
+
     }
 
     private fun initAppBar() {
@@ -91,5 +108,23 @@ class MainActivity : AppCompatActivity() {
     private fun initUser() {
         mainViewModel.userLiveData.value = intent.getSerializableExtra("user") as User
         Log.d(TAG, "initUser: ${mainViewModel.userLiveData.value}")
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount==1){
+            supportFragmentManager.popBackStack()
+            binding.mainBottomNavigation.selectedItemId = R.id.bottom_nav_mail
+            mainViewModel.selectedBottomMenuId.value = R.id.bottom_nav_mail
+            return
+        }
+        mainViewModel.run {
+            if (selectedBottomMenuId.value == R.id.bottom_nav_mail && checkedNavMenuItem.value!=R.id.nav_primary){
+                checkedNavMenuItem.value = R.id.nav_primary
+                binding.mainNavigationView.setCheckedItem(R.id.nav_primary)
+                return
+            }
+        }
+        super.onBackPressed()
+
     }
 }

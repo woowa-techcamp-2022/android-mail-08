@@ -1,19 +1,22 @@
 package com.example.mailappproject.presentation
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.window.layout.WindowMetrics
+import androidx.window.layout.WindowMetricsCalculator
 import com.example.mailappproject.R
 import com.example.mailappproject.data.User
 import com.example.mailappproject.databinding.ActivityLoginBinding
 import com.example.mailappproject.viewmodel.LoginViewModel
 import com.google.android.material.textfield.TextInputLayout
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -27,13 +30,18 @@ class LoginActivity : AppCompatActivity() {
     private val engNumberRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{4,12}\$".toRegex()
     private val emailRegex = android.util.Patterns.EMAIL_ADDRESS.toRegex()
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d(TAG, "onCreate: resources.displayMetrics.density: ${resources.displayMetrics.density}")
+        Log.d(TAG, "onCreate: resources.displayMetrics.density: ${resources.displayMetrics.densityDpi}")
         setContentView(binding.root)
 
         initLayout()
 
     }
+
 
     private fun initLayout() {
         binding.run {
