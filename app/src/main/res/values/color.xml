@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="mail_0">#FF8686</color>
+    <color name="mail_1">#FF6363</color>
+    <color name="mail_2">#62BFEA</color>
+    <color name="mail_3">#2E8BFF</color>
+    <color name="mail_4">#EA74FF</color>
+    <color name="mail_5">#94EC5D</color>
+    <color name="mail_6">#D7AC70A9</color>
+    <color name="app_bar">#D7FFFFFF</color>
+    <color name="base_text">#353535</color>
 </resources>
