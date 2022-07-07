@@ -14,6 +14,6 @@
     <color name="mail_4">#EA74FF</color>
     <color name="mail_5">#94EC5D</color>
     <color name="mail_6">#D7AC70A9</color>
-    <color name="app_bar">#D7FFFFFF</color>
-    <color name="base_text">#353535</color>
+    <color name="app_bar">#D7000000</color>
+    <color name="base_text">#CACACA</color>
 </resources>

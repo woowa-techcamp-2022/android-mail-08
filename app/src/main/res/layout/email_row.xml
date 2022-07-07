@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/app_base_space"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <FrameLayout
+        android:id="@+id/email_row_frame_layout"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/email_row_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"/>
+        <TextView
+            android:id="@+id/email_row_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="A"
+            android:textColor="@color/base_text"
+            android:gravity="center"
+            android:textSize="20sp"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/email_row_source"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/email_row_frame_layout"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/base_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="@dimen/app_base_space"
+        android:text="Google"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+    <TextView
+        android:id="@+id/email_row_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/email_row_frame_layout"
+        app:layout_constraintTop_toBottomOf="@+id/email_row_source"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/base_text"
+        android:paddingStart="@dimen/app_base_space"
+        android:text="Google"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+    <TextView
+        android:id="@+id/email_row_body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/email_row_frame_layout"
+        app:layout_constraintTop_toBottomOf="@+id/email_row_title"
+        android:textColor="@color/base_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="@dimen/app_base_space"
+        android:text="Google"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
