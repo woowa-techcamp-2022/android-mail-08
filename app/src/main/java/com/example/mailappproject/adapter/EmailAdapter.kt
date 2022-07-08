@@ -20,13 +20,11 @@ class EmailAdapter : ListAdapter<Email, EmailAdapter.ViewHolder>(EmailDiffCallba
                 if (email.source.first() in 'a'..'z' || email.source.first() in 'A'..'Z') {
                     Glide.with(binding.root)
                         .load(email.color)
-                        .circleCrop()
                         .into(binding.emailRowImageView)
                     emailRowFirstName.text = email.source.first().uppercase()
                 } else {
                     Glide.with(binding.root)
                         .load(R.drawable.ic_baseline_account_circle_24)
-                        .circleCrop()
                         .into(binding.emailRowImageView)
                     emailRowFirstName.text = ""
                 }
