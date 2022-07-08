@@ -25,8 +25,6 @@ class EmailAdapter : ListAdapter<Email, EmailAdapter.ViewHolder>(EmailDiffCallba
                 } else {
                     Glide.with(binding.root)
                         .load(R.drawable.ic_baseline_account_circle_24)
-                        .circleCrop()
-                        .override(70,70)
                         .into(binding.emailRowImageView)
                     emailRowFirstName.text = ""
                 }
